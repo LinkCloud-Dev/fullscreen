@@ -2,14 +2,14 @@ group 'com.hustlance.fullscreen'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.7.10'
+    ext.kotlin_version = '1.8.20'
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.2'
+        classpath 'com.android.tools.build:gradle:8.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -25,12 +25,22 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 35
     namespace 'com.hustlance.fullscreen'
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+    // Ensure Java 17 source and target compatibility
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    // Align Kotlin’s JVM target to 17
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
     defaultConfig {
         minSdkVersion 16
     }
